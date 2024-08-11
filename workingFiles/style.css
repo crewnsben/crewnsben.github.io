@@ -39,11 +39,21 @@ header{
   overflow-y: auto;
 }
 .sidebar a {
-  font-weight: 200;
+  font-weight: 100;
   font-size: 30px;
   color: #fff;
   text-decoration: none;
   margin: 10px 0; 
+}
+#Architects{
+  font-weight: 800;
+  font-size: 30px;
+}
+#projcttitle{
+  font-size: 30px;
+}
+#Discord{
+  font-size: 20px;
 }
 .userroles{
   font-size: 60px;
@@ -61,13 +71,13 @@ main{
   width:70%;
   flex-direction: row;
   justify-content: space-evenly;
-  padding: 40px;
+  padding-left: 40px;
   margin-left: 30%;
 }
 
 .content-wrapper{
   width: 80%;
-  min-height: 100vh;
+  min-height: 80%;
   height:auto;
   flex-direction:column ;
   justify-content: space-around;
@@ -83,17 +93,32 @@ main{
 
 .left_row,.right_row{
   width: 50%;
-  height:900px;
+  height: 800px;
   overflow-y: scroll;
   flex-direction:column ;
   align-items: center;
   scroll-behavior: smooth;
 }
+
 .left_row::-webkit-scrollbar,
 .right_row::-webkit-scrollbar {
     display: none;
 }
-
+#left_row, #right_row {
+  height: 100vh;
+  overflow: hidden;
+}
+.swiper-slide {
+  height: auto !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.swiper-slide img {
+  max-height: 80vh;
+  width: auto;
+  object-fit: contain;
+}
 .content-item img {
   transition: all 0.2s ease-in-out;
 }

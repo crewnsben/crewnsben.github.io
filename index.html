@@ -4,7 +4,8 @@
 <head>
   <!-- Nothing on the head Tag shows on the page-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="homepagestyle.css">
+
   <!-- <title> Urban Imaginarium, A project by Evangelos Koutsioumpas. SCI_Arc, Architectural Technologies Summer 2024
         </title> -->
 </head>
@@ -13,36 +14,56 @@
   <!-- Everything to show goes here -->
   <header>
     <div class="sidebar">
-      <div class="titletext">
-        <!-- <hr width="20%" align="left">  -->
-        <div class="clickbox" id="whitebox"><a href="#" id="projcttitle">Urban Imaginarium</a></div>
+      <div class="sidebar_graphics" style="align-items: center;">
+        <div id="homebox"></div>
+        <a href="#" id="projcttitle" style="color: #1f1f1f; padding-left: 10px;">Urban Imaginarium</a>
+        <span id="cursor-circle"></span>
       </div>
-      <div class="join" id="DISCORD">
-        <a href="#">JOIN A DISCORD SERVER</a>
-      </div>
-      <div class="userroles" id="roles">
-        <a href="#">Architects</a>
-        <a href="#">Neighbors</a>
-        <a href="#">Examples</a>
-      </div>
-      <div class="bottomcontainer">
-        <a href="#">Data Usage</a>
-        <a href="#">Statement</a>
-        <a href="#">Contact</a>
+      <!-- <hr width="20%" align="left">  -->
+      <div class="sidebar_graphics" style="align-items: top; align-content: top;">
+        <div id="homebox2"></div>
+        <div class="text-container">
+          <h3 id="desc" style="color: #1f1f1f; font-weight: 200; width: 90%; padding-left: 10px;">An agentic tool suite
+            for architects to create datasets that will influence the design of future
+            cities.<span id="additional-text"></span>
+          </h3>
+        </div>
       </div>
     </div>
   </header>
-  <main class="main-content">
-    <div class="left_row" id="left_row">
-      <div class="content-wrapper"></div>
+  <main class="buttons">
+    <div class="top">
+      <a href="#" class="discord-box">
+        <h3 style="color: #1f1f1f; font-size: 40px; width: 25%; font-weight: 400; font-kerning:normal;">Join the Discord
+          Server</h3>
+      </a>
+      <div class="side">
+        <a href="#" class="statement" href="#">
+          <p>statement</p>
+        </a>
+        <div class="examples">
+          <a href="#" class="examplebox" id="example-box1">
+            <p>Architects</p>
+          </a>
+          <a href="#" class="examplebox" id="example-box2">
+            <p>residents</p>
+          </a>
+          <a href="#" class="examplebox" id="example-box3">
+            <p>other</p>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="right_row" id="right_row">
-      <div class="content-wrapper"></div>
+    <div class="bottom">
+      <a href="#" class="technology">
+        <p>technology</p>
+      </a>
+      <a href="#" class="contact">
+        <p>contact</p>
+      </a>
     </div>
   </main>
-  <footer>
-  </footer>
-  <script src="script.js"></script>
+  <script src="home_script.js"></script>
 </body>
 
 </html>

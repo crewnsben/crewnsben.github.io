@@ -97,23 +97,20 @@ function createEndlessScroll(elementId) {
       // Create a new div to hold the focused image
       const focusedImageContainer = document.createElement('div');
       focusedImageContainer.id = 'focused-image-container';
-      focusedImageContainer.style.position = 'fixed';
-      focusedImageContainer.style.top = '0';
-      focusedImageContainer.style.left = '0';
-      focusedImageContainer.style.width = '50%';
-      focusedImageContainer.style.height = '50%';
+      focusedImageContainer.style.position = '';
+      focusedImageContainer.style.top= '0';
+      focusedImageContainer.style.left= '50%';
       focusedImageContainer.style.display = 'flex';
       focusedImageContainer.style.justifyContent = 'center';
       focusedImageContainer.style.alignItems = 'center';
-      focusedImageContainer.style.zIndex = '1000';
       focusedImageContainer.style.backgroundColor = 'rgba(0,0,0,0.5)';
 
       // Clone the image and add it to the new container
       const clonedImage = image.cloneNode(true);
-      clonedImage.style.transform = 'scale(1.25)';
+      clonedImage.style.transform = 'scale(2)';
       clonedImage.style.maxWidth = '80%';
       clonedImage.style.maxHeight = '80%';
-      clonedImage.style.objectFit = 'contain';
+      clonedImage.style.objectFit = 'fill';
       focusedImageContainer.appendChild(clonedImage);
 
       // Add the new container to the body
