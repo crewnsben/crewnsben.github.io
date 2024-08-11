@@ -45,7 +45,7 @@ function initializeSwipers() {
         const swiperInstance = new Swiper(`#${elementId}`, {
             direction: 'vertical',
             loop: true,
-            slidesPerView: 'auto',
+            slidesPerView: '2',
             spaceBetween: '5%',
             freeMode: true,
             speed: 5000,
@@ -67,7 +67,7 @@ function initializeSwipers() {
             scrollbar: {
                 el: '.swiper-scrollbar',
             },
-            autoplay: true,
+            autoplay: false,
             allowTouchMove: true,
 
             on: {
