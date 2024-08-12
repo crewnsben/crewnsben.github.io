@@ -120,58 +120,85 @@ document.addEventListener('DOMContentLoaded', () => {
   // });
 });
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   const container = document.getElementById('header-container');
-//   const images = document.querySelectorAll('.floating-image');
+function getBackgroundColor() {
+    return window.getComputedStyle(document.body).backgroundColor;
+}
 
-//   class FloatingImage {
-//       constructor(element) {
-//           this.element = element;
-//           this.x = Math.random() * (container.clientWidth - element.width);
-//           this.y = Math.random() * (container.clientHeight - element.height);
-//           if (this.x > container.clientWidth){
-//             this.x = container.clientWidth
-//           }
-//           if (this.y > container.clientWidth){
-//             this.y = container.clientWidth
-//           }
-//           this.vx = (Math.random() - 0.5) / 2;
-//           this.vy = (Math.random() - 0.8) / 2;
-//           this.isMoving = false;
+// Function to create a transition overlay
+function createOverlay(color) {
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = color;
+    overlay.style.zIndex = '9999';
+    overlay.style.opacity = '0';
+    overlay.style.transition = 'opacity 0.5s ease-in-out';
+    document.body.appendChild(overlay);
+    return overlay;
+}
 
-//           this.element.style.position = 'absolute';
-//           this.element.style.left = `${this.x}px`;
-//           this.element.style.top = `${this.y}px`;
-//           this.element.style.transition = 'opacity 0.5s ease-in-out';
-//           this.element.style.opacity = '0.5';
+// Function to handle page transitions
+function transitionToPage(url) {
+    const currentColor = getBackgroundColor();
+    const overlay = createOverlay("#151515");
 
-//           this.element.addEventListener('mouseenter', () => {
-//               if (!this.isMoving) {
-//                   this.isMoving = true;
-//                   this.move();
-//               }
-//           });
-//       }
+    // Fade in the overlay
+    setTimeout(() => {
+        overlay.style.opacity = '1';
+    }, 10);
 
-//       move() {
-//           if (!this.isMoving) return;
+    // Navigate to the new page after the fade-in is complete
+    setTimeout(() => {
+        window.location.href = url;
+    }, 500);
+}
 
-//           this.x += this.vx;
-//           this.y += this.vy;
+// Intercept all link clicks
+document.addEventListener('click', function(e) {
+    const target = e.target.closest('a');
+    if (target && target.getAttribute('href') !== '#') {
+        e.preventDefault();
+        transitionToPage(target.getAttribute('href'));
+    }
+});
 
-//           if (this.x <= 0 || this.x + this.element.width >= container.clientWidth) {
-//               this.vx *= -1;
-//           }
-//           if (this.y <= 0 || this.y + this.element.height >= container.clientHeight) {
-//               this.vy *= -1;
-//           }
+// Handle the fade-out transition when the new page loads
+window.addEventListener('load', function() {
+    const overlay = createOverlay(getBackgroundColor());
+    overlay.style.opacity = '1';
 
-//           this.element.style.left = `${this.x}px`;
-//           this.element.style.top = `${this.y}px`;
+    // Fade out the overlay
+    setTimeout(() => {
+        overlay.style.opacity = '0';
+        setTimeout(() => {
+            overlay.remove();
+        }, 200);
+    }, 0);
+});
 
-//           requestAnimationFrame(() => this.move());
-//       }
-//   }
 
-//   images.forEach(img => new FloatingImage(img));
-// });
+function fadeOutCurrentPage(callback) {
+    document.body.style.transition = 'opacity 0.3s ease-out';
+    document.body.style.opacity = '0';
+    setTimeout(callback, 50);
+  }
+  function showLoadingPage(url) {
+    const iframe = document.createElement('iframe');
+    iframe.src = 'loading.html';
+    iframe.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;border:none;z-index:9999;';
+    document.body.appendChild(iframe);
+
+    setTimeout(() => {
+      iframe.contentWindow.postMessage('fade-out', '*');
+      setTimeout(() => window.location.href = url, 50);
+    }, 50);
+  }
+
+  window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.3s ease-in';
+    setTimeout(() => document.body.style.opacity = '1', 0);
+  });

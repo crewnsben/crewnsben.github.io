@@ -19,27 +19,15 @@ body{
   flex-direction: row;
   background-color: #1a1a1a;
   color: #fff;
-  width: 100%;
-  cursor: none;
+  width: 1920px;
 }
-
-.custom-cursor {
-  width: 20px;
-  height: 20px;
-  background-color: aqua;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transition: all 0.1s ease;
-  transform: translate(-50%, -50%);
+.swiper-container {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
 }
-.custom-cursor.default {
-  width: 20px;
-  height: 20px;
-  background-color: rgb(234, 255, 40);
+.swiper-container.fade-in {
+  opacity: 1;
 }
-
 header{
  flex-direction: column;
 }
@@ -64,10 +52,10 @@ header{
   color: #fff;
   text-decoration: none;
   margin: 10px 0; 
-  transition: all 0.15s ease-in-out;
+  transition: all 0.2s ease-in-out;
   position:relative;
 }
-#Architects{
+#Examples{
   font-weight: 350;
   font-size: 40px;
 }
@@ -94,52 +82,58 @@ header{
 main{
   width:70%;
   flex-direction: row;
-  justify-content: left;
+  justify-content: space-evenly;
   padding-left: 40px;
   margin-left: 30%;
 }
 
-.swiper-wrapper{
+.content-wrapper{
   width: 80%;
   min-height: 80%;
   height:auto;
-  justify-content: flex-start;
+  flex-direction:column ;
+  justify-content: space-around;
+  align-content: center;
+  transition: step-start 200ms ease-out;
 }
 .content-item img {
   width: 100%; /* or any desired width */
-  height: 100vh;
+  height: auto;
   display: block;
   margin-bottom: 10px; /* space between images */
 }
 
-.left_row{
-  width: 100%;
+.left_row,.right_row{
+  width: 50%;
+  height: 800px;
   overflow-y: scroll;
+  flex-direction:column ;
+  align-items: center;
   scroll-behavior: smooth;
+}
+
+.left_row::-webkit-scrollbar,
+.right_row::-webkit-scrollbar {
+    display: none;
+}
+#left_row, #right_row {
   height: 100vh;
   overflow: hidden;
 }
-
 .swiper-slide {
   height: auto !important;
   display: flex;
-  flex-wrap: row ;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
 }
 
-.swiper-container {
-  opacity: 0;
-  transition: opacity 5s ease-in-out;
-  overflow: hidden;
-}
-.swiper-container.fade-in {
-  opacity: 1;
-}
 .swiper-slide img {
   max-height: 80vh;
   width: auto;
   object-fit: contain;
+}
+.content-item img {
+  transition: all 0.2s ease-in-out;
 }
 img{
   max-width: 500px;

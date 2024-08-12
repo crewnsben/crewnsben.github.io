@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            background-color: #f3f4f6; font-family: Arial, sans-serif;
+            opacity: 1; transition: opacity 0.3s ease-in-out;
+        }
+        body.fade-in { opacity: 1; transition: opacity 0.1s linear;}
+        body.fade-out { opacity: 0; background:color #151515 ;}
+        .loading-content { text-align: center; }
+        h1 { font-size: 2rem; margin-bottom: 2rem; }
+        .circle {
+            width: 64px; height: 64px; border-radius: 50%;
+            background-color: red; margin: 0 auto;
+            animation: blink 10ms infinite alternate;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-content">
+        <h1>Loading</h1>
+        <div class="circle"></div>
+    </div>
+    <script>
+        document.body.classList.add('fade-in');
+        window.addEventListener('message', (event) => {
+            if (event.data === 'fade-out') {
+                document.body.classList.add('fade-out');
+            }
+        });
+    </script>
+</body>
+</html>

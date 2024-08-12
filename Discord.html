@@ -4,13 +4,12 @@
 <head>
   <!-- Nothing on the head Tag shows on the page-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-  <link rel="stylesheet" href="Archstyle.css">
+  <link rel="stylesheet" href="Discord.css">
   <!-- <title> Urban Imaginarium, A project by Evangelos Koutsioumpas. SCI_Arc, Architectural Technologies Summer 2024
         </title> -->
 </head>
 
-<body style="opacity: 0;">
+<body>
   <!-- Everything to show goes here -->
   <header>
     <div class="sidebar">
@@ -19,29 +18,38 @@
         <div class="clickbox" id="whitebox"><a href="../index.html" id="projcttitle">Urban Imaginarium</a></div>
       </div>
       <div class="join" id='Join'>
-        <a href="Discord.html" id="Discord">JOIN A DISCORD SERVER</a>
+        <a href="#" id="Discord">JOIN A DISCORD SERVER</a>
       </div>
       <div class="userroles" id="roles">
         <a id='Architects'>Architects</a>
         <a href="#" id='Neighbors'>Neighbors</a>
-        <a href="Examples.html" id='Examples'>Examples</a>
+        <a href="" id='Examples'>Examples</a>
       </div>
       <div class="bottomcontainer">
+        <a href="#">Data Usage</a>
         <a href="#">Statement</a>
         <a href="#">Contact</a>
       </div>
     </div>
   </header>
   <main class="main-content">
-    <div class="left_row" id="left_row">
+    <div class="Discord_Container" id="discordtext">
+      <p>zip code</p>
+      <p>login</p>
+      <a href="LinkDiscord.html" class="arrow-link" id="presetLink">
+        <svg width="100" height="50" viewBox="0 0 100 50">
+          <path d="M0 25 L80 25 L70 10 M80 25 L70 40" fill="none" stroke=" #c5c5c5" stroke-width="5"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </a>
     </div>
-    <div class="right_row" id="right_row">
+    <div class="zip_code">
+      <input type="text" class="inhere" id="codeInput"  placeholder="Enter text here"  maxlength="5">
     </div>
   </main>
   <footer>
   </footer>
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  <script src="Archscript.js"></script>
+  <script src="Discordscript.js"></script>
 </body>
 
 </html>

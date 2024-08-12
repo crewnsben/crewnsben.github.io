@@ -1,12 +1,13 @@
 function checkSwiperAndInitialize() {
     if (typeof Swiper === 'undefined') {
         console.error('Swiper is not loaded. Please make sure you have included the Swiper library.');
+        setTimeout(checkSwiperAndInitialize, 100);
         return;
     }
     initializeSwipers();
 }
 
-function fadeIn(element, duration = 250) {
+function fadeIn(element, duration = 500) {
     element.style.opacity = 0;
     element.style.display = 'block';
     element.style.transition = `opacity ${duration}ms`;
@@ -30,20 +31,6 @@ function initializeSwipers() {
         'files/img/Steven-Holl-Architects-Ecology-and-Planning-Museums-.jpg',
         'files/img/Screenshot 2024-07-23 151645.png'
     ];
-    const imageTexts = {
-        'osm_diagramAthens.png': 'Athens Diagram',
-        'osm_diagramCompton.png': 'Compton Diagram',
-        'osm_diagramThessaloniki.png': 'Thessaloniki Diagram',
-        'Screenshot 2023-10-19 042952.png': 'Urban Planning 2023',
-        'Screenshot 2023-10-19 043458.png': 'City Layout 2023',
-        'Screenshot 2023-12-09 155927.png': 'December 2023 Urban Design',
-        'Screenshot 2024-06-29 174744.png': 'June 2024 City Plan',
-        'Screenshot 2024-07-23 150909.png': 'July 2024 Urban Development',
-        'Screenshot 2024-07-07 233418.png': 'City Night View 2024',
-        'Steven-Holl-Architects-Ecology-and-Planning-Museums-.jpg': 'Steven Holl Ecology Museum',
-        'Screenshot 2024-07-23 151645.png': 'Urban Planning July 2024'
-    };
-    
 
     let swipers = [];
 
@@ -70,7 +57,7 @@ function initializeSwipers() {
             direction: direction,
             loop: true,
             slidesPerView: 'auto',
-            spaceBetween: '2%',
+            spaceBetween: '5%',
             freeMode: {
                 enabled: true,
                 momentum: false,
@@ -78,7 +65,7 @@ function initializeSwipers() {
                 // momentumVelocityRatio: 0.1
             },
             speed: 20000,
-            centeredSlides: false,
+            centeredSlides: true,
             initialSlide: initialSlideIndex,
             preloadImages: true,
             updateOnImagesReady: true,
@@ -92,7 +79,7 @@ function initializeSwipers() {
                 sensitivity: 0.6,
             },
             on: {
-                init: function() {
+                init: function () {
                     this.el.addEventListener('click', (e) => {
                         if (e.target.tagName === 'IMG') {
                             focusImage(e.target);
@@ -109,7 +96,6 @@ function initializeSwipers() {
                     });
                     startCustomAutoplay(this, direction);
                 },
-                // ... (keep other existing event handlers)
             }
         });
 
@@ -118,61 +104,39 @@ function initializeSwipers() {
 
 
     function startCustomAutoplay(swiper, direction) {
-        const scrollSpeed = 0.1;
-        const intervalTime = 16;
-    
-        function autoplayScroll() {
+        const scrollSpeed = 0.05; // Adjust for smoother scrolling
+        const intervalTime = 6000; // ~60fps for smoother animation
+
+        swiper.customAutoplayInterval = setInterval(() => {
             const wrapper = swiper.wrapperEl;
             const maxScroll = wrapper.scrollHeight - wrapper.clientHeight;
-    
-            if (direction === 'vertical') {
+
+            if (direction === 'up') {
                 wrapper.scrollTop -= scrollSpeed;
                 if (wrapper.scrollTop <= 0) wrapper.scrollTop = maxScroll;
             } else {
                 wrapper.scrollTop += scrollSpeed;
                 if (wrapper.scrollTop >= maxScroll) wrapper.scrollTop = 0;
             }
-        }
-    
-        swiper.customAutoplayInterval = setInterval(autoplayScroll, intervalTime);
-    
-        // Add event listeners for mouse enter and leave
-        swiper.el.addEventListener('mouseenter', () => {
-            clearInterval(swiper.customAutoplayInterval);
-        });
-    
-        swiper.el.addEventListener('mouseleave', () => {
-            swiper.customAutoplayInterval = setInterval(autoplayScroll, intervalTime);
-        });
+        }, intervalTime);
     }
 
     function createSlide(src, index, elementId) {
         const slide = document.createElement('div');
         slide.className = 'swiper-slide';
         slide.style.height = 'auto';
-        
+
         const img = document.createElement('img');
         img.src = src;
         img.alt = `Urban Image ${index + 1}`;
         img.style.width = '100%';
         img.style.height = 'auto';
         img.style.objectFit = 'cover';
-        
-        const text = document.createElement('div');
-        text.className = 'slide-text';
-        text.textContent = imageTexts[src.split('/').pop()] || `Image ${index + 1}`;
-        text.style.position = 'relative';
-        text.style.top= '10px';
-        text.style.right = '10px';
-        text.style.color = 'white';
-        // text.style.backgroundColor = 'rgba(0,0,0,0.5)';
-        text.style.padding = '5px';
-        text.style.borderRadius = '3px';
-        
+
         slide.appendChild(img);
-        slide.appendChild(text);
         return slide;
     }
+
     function focusImage(image) {
         const focusedImageContainer = document.createElement('div');
         focusedImageContainer.id = 'focused-image-container';
@@ -186,7 +150,7 @@ function initializeSwipers() {
             justifyContent: 'center',
             alignItems: 'center',
             zIndex: '1000',
-            backgroundColor: 'rgba(0,0,0,0.95)',
+            backgroundColor: 'rgba(0,0,0,0.9)',
         });
 
         const clonedImage = image.cloneNode(true);
@@ -194,6 +158,7 @@ function initializeSwipers() {
             maxWidth: '80%',
             maxHeight: '80%',
             objectFit: 'contain',
+            transform: 'scale(1)',
             transition: 'transform 0.3s ease-in-out',
         });
 
@@ -209,7 +174,7 @@ function initializeSwipers() {
     function unfocusImage() {
         const focusedImageContainer = document.getElementById('focused-image-container');
         if (focusedImageContainer) {
-            focusedImageContainer.style.transition = 'opacity 0.8s ease-out';
+            focusedImageContainer.style.transition = 'opacity 0.3s ease-out';
             focusedImageContainer.style.opacity = '0';
             setTimeout(() => {
                 document.body.removeChild(focusedImageContainer);
@@ -219,8 +184,15 @@ function initializeSwipers() {
         };
     }
 
-    swipers = [createSwiper('left_row', 8, 'vertical')];
-    swipers[0].update();
+    swipers = [
+        createSwiper('left_row', 5, 'vertical'),
+        createSwiper('right_row', 10, 'vertical')
+    ];
+
+    if (swipers[1]) {
+        swipers[1].params.autoplay.reverseDirection = true;
+        swipers[1].update();
+    }
 
     function ensureCorrectInitialPosition() {
         swipers.forEach((swiper, index) => {
@@ -228,6 +200,10 @@ function initializeSwipers() {
                 swiper.update();
                 const initialIndex = index === 0 ? 5 : 8;
                 swiper.slideTo(initialIndex, 0, false);
+
+                setTimeout(() => {
+                    swiper.slideTo(initialIndex, 0, false);
+                }, 10);
             }
         });
     }
@@ -239,12 +215,11 @@ function initializeSwipers() {
 
     setTimeout(() => {
         swiperContainers.forEach(container => fadeIn(container));
-    }, 500);
+    }, 100);
 
     window.addEventListener('load', ensureCorrectInitialPosition);
 }
 
-document.addEventListener('DOMContentLoaded', checkSwiperAndInitialize);
 
 // Fade in Transitions
 function fadeOutCurrentPage(callback) {
@@ -252,30 +227,6 @@ function fadeOutCurrentPage(callback) {
     document.body.style.opacity = '0';
     setTimeout(callback, 500);
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const cursor = document.createElement('div');
-    cursor.classList.add('custom-cursor', 'default');
-    document.body.appendChild(cursor);
-  
-    const images = document.querySelectorAll('img');
-  
-    document.addEventListener('mousemove', (e) => {
-      cursor.style.left = `${e.clientX}px`;
-      cursor.style.top = `${e.clientY}px`;
-    });
-  
-    images.forEach(img => {
-      img.addEventListener('mouseenter', () => {
-        cursor.classList.remove('default');
-      });
-  
-      img.addEventListener('mouseleave', () => {
-        cursor.classList.add('default');
-      });
-    });
-  });
-  
 
 window.addEventListener('load', () => {
     document.body.style.opacity = '0';
@@ -342,9 +293,11 @@ window.addEventListener('load', function() {
     }, 0);
 });
 
+document.addEventListener('DOMContentLoaded', checkSwiperAndInitialize);
+
 document.addEventListener('DOMContentLoaded', function() {
     const sidebarLinks = document.querySelectorAll('.sidebar a');
-    const architectsLink = document.getElementById('Architects');
+    const architectsLink = document.getElementById('Examples');
     const originalArchitectsStyle = window.getComputedStyle(architectsLink);
 
     sidebarLinks.forEach(link => {
