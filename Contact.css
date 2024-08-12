@@ -94,14 +94,13 @@ header {
   justify-content: space-between;
   align-items: end;
 }
-.topsub{
-  width: 50%;
-}
 
 .centText{
-  width: 50%;
-  font-size: 35px;
+  width: 100%;
+  padding: 15px;
+  font-size: 25px;
   color:#f1f1f1;
+  justify-content: center;
 }
 .main-content {
   flex-direction: column;
@@ -141,18 +140,25 @@ header {
   left: 50%;
   transform: translate(-50%, -50%);
   flex-direction: column;
+  text-align: center;
+  justify-content: center;
   align-items: center;
 }
 .topsub{
   font-size: 35px;
   box-sizing: border-box;
-  padding: 40px;
-  width: 60%;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
 }
-#statement{
+#contact{
   font-size: 40px; 
   font-weight: 400;
 }
-
-
+#mailto{
+  font-size: 30px;
+  font-weight: 200;
+  color: #f1f1f1;
+  text-decoration: none;
+}
