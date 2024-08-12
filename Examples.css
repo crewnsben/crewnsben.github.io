@@ -37,14 +37,24 @@ header{
   width: 30%;
   background: color #151515;
   padding: 40px;
-  flex-direction: column;
-  justify-content: space-between;
+  padding-left: 0 ;
+  flex-direction: row;
+  justify-content: left;
   align-items: top  ;
   position:fixed;
   top: 0;
   bottom: 0;
   left: 0px;
   overflow-y: auto;
+}
+.graphs{
+  align-items: left;  
+}
+.side{
+  flex-direction: column;
+  justify-content: space-between;
+  position: left;
+  padding-left: 15px;
 }
 .sidebar a {
   font-weight: 100;
