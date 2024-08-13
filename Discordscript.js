@@ -54,3 +54,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+document.getElementById('codeInput').addEventListener('input', function() {
+  const serverName = this.value;
+  // Store the value in localStorage
+  localStorage.setItem('joinedServer', serverName);
+});

@@ -20,3 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 });
+
+window.onload = function() {
+  const serverName = localStorage.getItem('joinedServer');
+  if (serverName) {
+      document.getElementById('serverInfo').textContent = `: ${serverName}`;
+      // Clear the stored value
+      localStorage.removeItem('joinedServer');
+  } else {
+      document.getElementById('serverInfo').textContent = 'No server information available.';
+  }
+};
