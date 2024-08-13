@@ -65,6 +65,8 @@ element2.style.opacity = 0;
 
 // Start the recursive fading
 recursiveFade(element1, element2, fadeDuration);
+
+
 const rollingImage = document.querySelector('img[alt="disclogo"]');
 
 if (rollingImage) {
